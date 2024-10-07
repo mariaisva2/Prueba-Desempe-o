@@ -1,0 +1,12 @@
+.icom-container {
+    transition: transform 0.5s ease-in-out;
+    
+    &.register {
+      transform: translateX(0.5%);
+    }
+  
+    &.login {
+      transform: translateX(0);
+    }
+  }
+  
