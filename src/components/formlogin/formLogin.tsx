@@ -57,6 +57,8 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSwitchToRegister }) => {
     setError(null);
     setLoading(true);
 
+    console.log('handleSubmit')
+
     try {
       const response = await fetch('http://192.168.88.39:7000/auth/login', {
         method: 'POST',
@@ -68,8 +70,11 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSwitchToRegister }) => {
       if (!response.ok) {
         throw new Error(data.message || 'Error al iniciar sesión');
       }
-      
-      Cookies.set('token', data.token); 
+
+      console.log({ data })
+
+      Cookies.set('token', data.access_token); 
+
       setIsLoggedIn(true); 
     } catch (error) {
       setError(error instanceof Error ? error.message : 'Error desconocido');

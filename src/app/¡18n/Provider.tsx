@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState, ReactNode } from "react";
+import { createContext, useEffect, useState, ReactNode, useMemo } from "react";
 import en from "../messages/en.json"; 
 import es from "../messages/es.json"; 
 
@@ -9,10 +9,10 @@ interface Translation {
 interface I18nContextValue {
   language: string;
   changeLanguage: (lang: string) => void;
-  t: (key: string) => string; 
+  t: (key: string, defaultValue?: string) => string; 
 }
 
-export const I18nContext = createContext<I18nContextValue | null>(null);
+export const I18nContext = createContext<I18nContextValue | undefined>(undefined);
 
 const supportedLanguages = ["en", "es"];
 const defaultLanguage = "en";
@@ -42,10 +42,10 @@ export const I18nProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
   const translations: { [key: string]: Translation } = {
     en,
-    es
-  }; 
+    es,
+  };
 
-  const t = (key: string): string => {
+  const t = (key: string, defaultValue: string = ""): string => {
     const keys = key.split(".");
     let value: Translation | undefined = translations[language];
 
@@ -53,15 +53,18 @@ export const I18nProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       if (value && typeof value === "object" && k in value) {
         value = value[k] as Translation; 
       } else {
-        return ""; // Retorna una cadena vacía si la clave no se encuentra
+        console.warn(`Translation key "${key}" not found for language "${language}".`);
+        return defaultValue; 
       }
     }
 
-    return typeof value === "string" ? value : ""; 
+    return typeof value === "string" ? value : defaultValue; 
   };
 
+  const contextValue = useMemo(() => ({ language, changeLanguage, t }), [language]);
+
   return (
-    <I18nContext.Provider value={{ language, changeLanguage, t }}>
+    <I18nContext.Provider value={contextValue}>
       {children}
     </I18nContext.Provider>
   );

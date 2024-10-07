@@ -8,7 +8,7 @@ import Product from '../../components/products/products';
 import Navbar from '../../components/navbar/navbar'; 
 import { I18nProvider } from '../¡18n/Provider';
 
-import './home.scss'; 
+import './Home.scss'; 
 
 const HomePage: React.FC = () => {
   const handleLogout = () => {

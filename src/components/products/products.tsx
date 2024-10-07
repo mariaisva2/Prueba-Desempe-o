@@ -22,14 +22,30 @@ const Product: React.FC<{ selectedCategory: string }> = ({ selectedCategory }) =
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch('http://localhost:7000/auth/products');
-        if (!response.ok) {
-          throw new Error('Error al obtener los productos');
+        const token = document.cookie.split('; ').find(row => row.startsWith('token='))?.split('=')[1];
+        const tokenValue = token ? token.split('=')[1] : null;
+        console.log({tokenValue , token})
+
+        if (!token) {
+          throw new Error('El token no se encontrò en las cookies');
         }
+
+        const response = await fetch('http://192.168.88.39:7000/auth/products', {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+        
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error('Error al tratar de obtener los productos ');
+        }
+
         const data: ProductType[] = await response.json();
         setProducts(data);
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Error desconocido');
+        console.error('Error fetching products:', err);
       } finally {
         setLoading(false);
       }
@@ -45,8 +61,8 @@ const Product: React.FC<{ selectedCategory: string }> = ({ selectedCategory }) =
     ? products 
     : products.filter(product => product.category === selectedCategory);
 
-  const handleAddToCart = (product: ProductType) => {
-    dispatch(addItem({ ...product, quantity: 1 })); 
+  const handleAddToCart = (Product: ProductType) => {
+    dispatch(addItem({ ...Product, quantity: 1 })); 
   };
 
   return (
@@ -81,7 +97,7 @@ const Product: React.FC<{ selectedCategory: string }> = ({ selectedCategory }) =
 
 export default Product;
 
-// Styled components
+
 const ProductSection = styled.section`
   padding: 2rem;
 `;
@@ -173,5 +189,6 @@ const AddToCartButton = styled.button`
     background-color: #540853;
   }
 `;
+
 
 

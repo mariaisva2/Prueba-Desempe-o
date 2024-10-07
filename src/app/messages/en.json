@@ -24,28 +24,15 @@
       "usernamePlaceholder": "Your username",
       "password": "Password",
       "passwordPlaceholder": "Your password",
-      "confirmPassword": "Confirm Password",
-      "confirmPasswordPlaceholder": "Confirm your password",
-      "city": "City",
-      "cityPlaceholder": "Your city",
       "street": "Street",
       "streetPlaceholder": "Your street",
       "number": "Number",
       "numberPlaceholder": "Your number",
-      "zipcode": "Zip Code",
-      "zipcodePlaceholder": "Your zip code",
       "phone": "Phone",
       "phonePlaceholder": "Your phone",
       "loading": "Loading...",
-      "register": "Register",
-      "continue": "Continue",
-      "question": "Already have an account?",
-      "loginLink": "Log in here",
-      "completeFields": "Please fill in all required fields.",
-      "passwordMismatch": "Passwords do not match.",
-      "error": "Error registering user.",
-      "success": "Registration successful.",
-      "unknownError": "Unknown error."
+      "register": "Register"
+      
     },
     "logout": "Logout"
   }
