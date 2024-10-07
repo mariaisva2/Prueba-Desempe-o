@@ -34,6 +34,14 @@
       "register": "Register"
       
     },
+    "Your Cart":{
+      "title": "Your Cart",
+      "subtitle": "Your shopping cart",
+      "loading": "Loading...",
+      "empty": "Your cart is empty",
+      "total": "Total",
+      "checkout": "Checkout"
+    },
     "logout": "Logout"
   }
   

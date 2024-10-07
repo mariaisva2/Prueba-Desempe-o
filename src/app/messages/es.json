@@ -41,6 +41,15 @@
       "success": "Registro exitoso.",
       "unknownError": "Error desconocido."
     },
+    "Your Cart":{
+      "title": "Tu Carrito",
+      "subtitle": "Tu carrito de compras",
+      "loading": "Cargando...",
+      "empty": "Tu carrito está vacío",
+      "total": "Total",
+      "checkout": "Pagar"
+    },
+
     "logout": "Cerrar sesión"
   }
   

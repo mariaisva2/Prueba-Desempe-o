@@ -133,8 +133,6 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSwitchToRegister }) => {
 
 export default LoginForm;
 
-// Styled Components
-
 const StyledLoginContainer = styled.div`
   display: flex;
   flex-direction: column;
